@@ -147,12 +147,12 @@ function getBook(id) {
 
 const books = getBooks();
 
-const book = getBook(2);
+const book = getBook(3);
 book;
 // const title = book.title;
 // const author = book.author;
 
-const { title, author, genres } = book; //destructuring on objects.
+const { title, author, genres, pages, publicationDate } = book; //destructuring on objects.
 
 console.log(author, title, genres);
 
@@ -190,3 +190,64 @@ newBook;
 
 newBook = { moviePublicationDate: "2001-12-19", pages: 1210, ...book }; //the second page 295 override the first page 1210
 newBook;
+
+let summary = `${title}, a${pages}-page long book in ${
+  publicationDate.split("-")[0]
+}.`;
+
+summary = `${title}, a${pages}-page long book in ${publicationDate.substring(
+  0,
+  4
+)}.`;
+
+summary;
+
+//////Arrow Functions
+
+function getYear(str) {
+  return str.substring(0, 4);
+} //function declaration
+
+console.log(getYear(publicationDate));
+
+const obtainYear = (str) => str.substring(0, 4); //function expression
+
+console.log(obtainYear(publicationDate));
+
+function getTotalReviewCount(book) {
+  const goodread = book.reviews.goodreads.reviewsCount;
+  const librarything = book.reviews.librarything?.reviewsCount ?? 0;
+  return goodread + librarything;
+}
+
+console.log(getTotalReviewCount(book));
+
+//get each book's titles
+
+const titles = books.map((book) => book.title);
+console.log(titles);
+
+const essentialData = books.map((book) => {
+  return {
+    title: book.title,
+    author: book.author,
+  };
+});
+essentialData;
+
+//Only that books have more than 500 pages.
+const book500 = books
+  .filter((book) => book.pages > 500)
+  .filter((book) => book.hasMovieAdaptation);
+book500;
+
+const adventureBooks = books
+  .filter((book) => book.genres.includes("adventure"))
+  .map((book) => book.title);
+adventureBooks;
+
+const pagesAllBooks = books.reduce((acc, book) => acc + book.pages, 0);
+pagesAllBooks;
+
+const sortedByPages = books.slice().sort((a, b) => a.pages - b.pages);
+sortedByPages;
