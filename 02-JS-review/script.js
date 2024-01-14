@@ -251,3 +251,17 @@ pagesAllBooks;
 
 const sortedByPages = books.slice().sort((a, b) => a.pages - b.pages);
 sortedByPages;
+// change the books
+const newBook1 = {
+  id: 6,
+  title: "Haryy Potter",
+  author: "J.K.R",
+};
+
+//add a book
+const bookAdded1 = [...books, newBook1];
+const bookAdded2 = [newBook1, ...books];
+
+//delete a book
+
+const bookDeleted = books.filter((book) => book.id !== 3);
