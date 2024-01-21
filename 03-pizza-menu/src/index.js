@@ -74,6 +74,7 @@ function Menu() {
   const numPizzas = pizzas.length;
 
   return (
+    // 数组中需要将key 直接添加给 forEach， map 或 for 循环直接控制的元素。
     <main className="menu">
       <h2>Our menu</h2>
 

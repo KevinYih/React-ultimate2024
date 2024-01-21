@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Children, useState } from "react";
 
 const messages = [
   "Learn React ⚛️",
@@ -42,26 +42,49 @@ export default function App() {
             <div className={step >= 3 ? "active" : ""}>3</div>
           </div>
 
-          <p className="message">
-            Step {step} : {messages[step - 1]}
-          </p>
+          {/* <p className="message">
+            <h3>Step {step}</h3>
+            {messages[step - 1]}
+          </p> */}
+
+          <StepMessage step={step}>{messages[step - 1]}</StepMessage>
 
           <div className="buttons">
-            <button
-              onClick={handlPrevious}
-              style={{ backgroundColor: "#7950f2", color: "#fff" }}
+            <Button
+              onClick={() => handlPrevious()}
+              bgColor="#7950f2"
+              textColor="#fff"
             >
-              Previous
-            </button>
-            <button
-              onClick={handleNext}
-              style={{ backgroundColor: "#7950f2", color: "#fff" }}
-            >
-              Next
-            </button>
+              🫲Previous
+            </Button>
+            {/* {Children props} */}
+            <Button onClick={handleNext} bgColor={"#7950f2"} textColor={"#fff"}>
+              Previous🫱
+            </Button>
           </div>
         </div>
       )}
     </>
+  );
+}
+
+// children is previously defined reserved keyword
+function Button({ onClick, bgColor, textColor, children }) {
+  return (
+    <button
+      onClick={onClick}
+      style={{ backgroundColor: bgColor, color: textColor }}
+    >
+      {children}
+    </button>
+  );
+}
+
+function StepMessage({ step, children }) {
+  return (
+    <div className="message">
+      <h3>Step {step}</h3>
+      {children}
+    </div>
   );
 }
